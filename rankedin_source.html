@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <title>한국 오픈소스 개발자 커뮤니티 - ranked.in</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- for Google -->
+    <meta name="author" content="uzysjung" />
+    <meta name="keywords" content="랭크드인,깃헙,github,오픈소스,커뮤니티,개발자,친목,행복,즐거움,취미,node.js,루비,레일즈,스프링" />
+    <meta name="application-name" content="Rankedin.kr" />
+
+
+    <meta name="description" content="한국 오픈소스 개발자들과 관련된 통계가 매달 추가 됩니다. 잊지말고 방문 해주세요." />
+    <meta name="copyright" content="Copyright© 2015 All rights reserved by uzysjung" />
+
+    <!-- for Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Rankedin에서 알려드리는 한국 오픈소스 개발과 관련된 통계!" />
+    <meta property="og:image" content="http://rankedin.kr/public/image/logo_large.png" />
+    <meta property="og:url" content="http://rankedin.kr" />
+    <meta property="og:description" content="한국 오픈소스 개발자들과 관련된 통계가 매달 추가 됩니다. 잊지말고 방문 해주세요." />
+
+    <!-- for Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Rankedin에서 알려드리는 한국 오픈소스 개발과 관련된 통계!" />
+    <meta name=”twitter:url” content="http://rankedin.kr">
+    <meta name="twitter:description" content="한국 오픈소스 개발자들과 관련된 통계가 매달 추가 됩니다. 잊지말고 방문 해주세요." />
+    <meta name="twitter:image" content="http://rankedin.kr/public/image/logo_large.png" />
+
+
+    <!-- JSSocials -->
+    <link rel="stylesheet" type="text/css" href="/public/bower_components/jssocials/dist/jssocials.css" />
+    <link rel="stylesheet" type="text/css" href="/public/bower_components/jssocials/dist/jssocials-theme-flat.css" />
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link rel="icon" type="image/x-icon" href="/public/image/favicon.ico">
+    <link href="/public/css/bootstrap.css" rel="stylesheet" />
+    <link href="/public/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <!--<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+
+    <script src="/public/js/menu.js"></script>
+
+</head>
+<body>
+
+<!-- begin #page-container -->
+<!-- begin #header -->
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/" style="padding: 10px 15px;"><img src="/public/image/logo.png" style="width: 50%"></a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li id="menu_user"><a href="/users">사용자</a></li>
+                <li id="menu_repo"><a href="/repos">저장소</a></li>
+                <li class="dropdown" id="menu_board">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">커뮤니티 <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <!--<li><a href="/boards">전체보기</a></li>-->
+                        <!--<li class="divider"></li>-->
+                        <li id="menu_notice"><a role="menuitem" tabindex="-1" href="/board/notice">공지사항</a></li>
+                        <li class="divider"></li>
+                        <li><a role="menuitem" tabindex="-1" href="/board/free">자유공간</a></li>
+                        <li><a role="menuitem" tabindex="-1" href="/board/study">공부방</a></li>
+                    </ul>
+                </li>
+                <li id="menu_lang"><a href="/stats">통계</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+               <li style="margin-right: 20px; height: 64px">
+                
+
+                <a href="/login">Sign in with Github <i class="fa fa-github" style="font-size: 16pt"></i></a>
+                
+                </li>
+            </ul>
+
+        </div>
+
+        <form class="navbar-form navbar-left" role="search" action="/search" method="post">
+            <div class="form-group">
+                <input name="name" id="name" type="text" class="form-control" placeholder="사용자 입력" style="padding-left: 5px;">
+            </div>
+            <button type="submit" class="btn btn-default">검색</button>
+        </form>
+    </div>
+
+</nav>
+<div class="container">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css" rel="stylesheet" type="text/css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.js"></script>
+<script src="/public/js/d3.layout.cloud.js"></script>
+<script src="/public/js/stats.js"></script>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">   <h4 >한국 개발자 언어 분포</h4><hr/>  <div id="langchart"></div> </div>
+        <div class="col-md-6">   <h4 >Top 100 인기 개발자 중 이직 희망자</h4><hr/>  <div id="jobchart"></div> </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12"> <h4 >Top 100 개발자 소속 회사</h4><hr/>  <div id="company" style="   max-width : 100%;
+        height: auto;"></div> </div>
+    </div>
+    <div class="clearfix visible-lg"></div>
+</div>
+
+
+
+
+<script type="text/javascript">
+    
+    
+
+
+
+    var dataCompany100 = [
+        
+        {text:'Kakao',size: (3)/100 * 2500},
+    
+        {text:'SMARTSTUDY',size: (3)/100 * 2500},
+    
+        {text:'NEXON',size: (2)/100 * 2500},
+    
+        {text:'LEZHIN Entertainment',size: (2)/100 * 2500},
+    
+        {text:'Google',size: (2)/100 * 2500},
+    
+        {text:'Riiid!',size: (2)/100 * 2500},
+    
+        {text:'UNIST',size: (1)/100 * 2500},
+    
+        {text:'Side Effect Studio',size: (1)/100 * 2500},
+    
+        {text:'RH Korea',size: (1)/100 * 2500},
+    
+        {text:'KT Corp.',size: (1)/100 * 2500},
+    
+        {text:'TossLab Inc',size: (1)/100 * 2500},
+    
+        {text:'AdMaster',size: (1)/100 * 2500},
+    
+        {text:'ParkingSquare',size: (1)/100 * 2500},
+    
+        {text:'SW Maestro 4th',size: (1)/100 * 2500},
+    
+        {text:'tipJS JavaScript MVC framework',size: (1)/100 * 2500},
+    
+        {text:'Realm',size: (1)/100 * 2500},
+    
+        {text:'Neople',size: (1)/100 * 2500},
+    
+        {text:'YelloMobile',size: (1)/100 * 2500},
+    
+        {text:'KESTI',size: (1)/100 * 2500},
+    
+        {text:'StyleShare',size: (1)/100 * 2500},
+    
+        {text:'LINE plus',size: (1)/100 * 2500},
+    
+        {text:'Yonsei University',size: (1)/100 * 2500},
+    
+        {text:'What! Studio in Nexon',size: (1)/100 * 2500},
+    
+        {text:'Box and Whisker',size: (1)/100 * 2500},
+    
+        {text:'synapsoft',size: (1)/100 * 2500},
+    
+        {text:'SK telecom',size: (1)/100 * 2500},
+    
+        {text:'Init Invent Inc.',size: (1)/100 * 2500},
+    
+        {text:'hangum system',size: (1)/100 * 2500},
+    
+        {text:'Kakao Corp.',size: (1)/100 * 2500},
+    
+        {text:'THE BEATPACKING COMPANY',size: (1)/100 * 2500},
+    
+        {text:'thdtjsdn',size: (1)/100 * 2500},
+    
+        {text:'MKLab',size: (1)/100 * 2500},
+    
+        {text:'TEQ inc.',size: (1)/100 * 2500},
+    
+        {text:'youknowone.org',size: (1)/100 * 2500},
+    
+        {text:'Appetizer Games',size: (1)/100 * 2500},
+    
+        {text:'Happily Ltd',size: (1)/100 * 2500},
+    
+        {text:'포스텍 개발자 네트워크 PoApper',size: (1)/100 * 2500},
+    
+        {text:'GSSHOP',size: (1)/100 * 2500},
+    
+        {text:'New York University',size: (1)/100 * 2500},
+    
+        {text:'FV USA, LLC',size: (1)/100 * 2500},
+    
+        {text:'Naver Corp.',size: (1)/100 * 2500},
+    
+        {text:'Seoul National University',size: (1)/100 * 2500},
+    
+        {text:'Retired',size: (1)/100 * 2500},
+    
+        {text:'BTNcafe Co.',size: (1)/100 * 2500},
+    
+        {text:'EC Plaza Network, Inc.',size: (1)/100 * 2500},
+    
+        {text:'Nexon Korea',size: (1)/100 * 2500},
+    
+        {text:'SK Planet',size: (1)/100 * 2500},
+    
+        {text:'Spoqa',size: (1)/100 * 2500},
+    
+        {text:'Haroo Studio',size: (1)/100 * 2500},
+    
+        {text:'Tomato System',size: (1)/100 * 2500},
+    
+        {text:'Burt.K',size: (1)/100 * 2500},
+    
+        {text:'Looking for a job',size: (1)/100 * 2500},
+    
+        {text:'VCNC',size: (1)/100 * 2500},
+    
+        {text:'Hardkernel Co.,LTD.',size: (1)/100 * 2500},
+    
+        {text:'N42',size: (1)/100 * 2500},
+    
+        {text:'None',size: (1)/100 * 2500},
+    
+        {text:'Ediket',size: (1)/100 * 2500},
+    
+        {text:'ungleich GmbH',size: (1)/100 * 2500},
+    
+        {text:'ssomai.com',size: (1)/100 * 2500},
+    
+    ];
+
+
+    var dataLangDistribution = [          
+        ['JavaScript', 0],
+        
+        ['Objective-C', 0],
+        
+        ['Java', 0],
+        
+        ['Python', 0],
+        
+        ['C', 0],
+        
+        ['C++', 0],
+        
+        ['Ruby', 0],
+        
+        ['etc', 0],
+        ];
+
+    var dataLangDistributionFinal = [  
+        ['JavaScript', 11042],
+        
+        ['Objective-C', 2135],
+        
+        ['Java', 7758],
+        
+        ['Python', 5022],
+        
+        ['C', 3005],
+        
+        ['C++', 2841],
+        
+        ['Ruby', 2707],
+        
+        ['etc', 23497],
+         ];
+    var dataJobDistribution = [ ['희망자',0], ['비희망자',0]];
+    var dataJobDistributionFinal = [ ['희망자',33], ['비희망자',98]];
+
+    var width = 480;
+    var height = 320;
+    wordCloud("company",width,height,dataCompany100);
+    dounutChart("langchart","language",dataLangDistribution,dataLangDistributionFinal);
+    dounutChart("jobchart","이직 희망자",dataJobDistribution,dataJobDistributionFinal);
+
+</script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-63031146-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+    <hr>
+
+    <footer>
+        <div class="row">
+            <div class="col-md-6">         <p>Copyright&copy; 2015 All rights reserved by <a href="http://github.com/uzysjung">uzysjung</a></p>
+            </div>
+            <div class="col-md-6">     <p class="text-right">fetched data on <em>3 days ago</em></p> </div>
+        </div>
+    </footer>
+</div>
+
+
+<!-- end #content -->
+
+<!-- end page container -->
+
+</body>
+</html>

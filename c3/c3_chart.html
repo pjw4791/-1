@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h4>표를 만들자</h4>
+    <div id="chart"></div>
+    <!-- Load c3.css -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.js"></script>
+    <script>
+        /*var chart = c3.generate({
+            bindto: '#chart',
+            data: {
+                columns: [
+                    ['data1', 30, 200, 100, 400, 150, 250],
+                    ['data2', 50, 20, 10, 40, 15, 25]
+                ]
+            }
+        });*/
+        var chart = c3.generate({
+    data: {
+        columns: [
+            ['data1', 30, 200, 100, 400, 150, 250],
+            ['data2', 130, 100, 140, 200, 150, 50]
+        ],
+        type: 'bar'
+    },
+    bar: {
+        width: {
+            ratio: 0.5 // this makes bar width 50% of length between ticks
+        }
+        // or
+        //width: 100 // this makes bar width 100px
+    }
+});
+
+/*setTimeout(function () {
+    chart.load({
+        columns: [
+            ['data3', 130, -150, 200, 300, -200, 100]
+        ]
+    });
+}, 1000);*/
+    </script>
+</body>
+</html>
